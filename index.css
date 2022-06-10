@@ -3,9 +3,24 @@
   margin: 0;
 }
 
+/* 폰트 */
 html {
   font-size: 16px;
 }
+h2 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 2.5rem;
+}
+
+p {
+  font-weight: 300;
+}
+
+/* 폰트 */
 
 .move {
   display: flex;
@@ -104,6 +119,150 @@ html {
   display: inline;
 }
 
-.introduce {
+section:not(.home) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
+}
+
+.open_title {
+  opacity: 0;
+  transform: translateY(3vh);
+  transition: all 0.5s ease-out;
+  position: absolute;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.open_title {
+  width: 100vw;
+  height: 100vh;
+}
+
+.open_title.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+article {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+}
+
+article h3 {
+  margin-bottom: 100px;
+  border-bottom: 2px solid #000;
+}
+
+article.skill {
+  opacity: 0;
+  transition: all 0.5s ease-out;
+}
+article.skill.on {
+  opacity: 1;
+}
+
+.skillName {
+  display: flex;
+  padding: 10px;
+  border-radius: 10px;
+  align-items: center;
+  width: 200px;
+}
+
+.skillEl {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+#html .skillName {
+  background-color: #e55126;
+}
+
+#css .skillName {
+  background-color: #0c73b8;
+}
+
+#js .skillName {
+  background-color: #e5a228;
+}
+
+#react .skillName {
+  background-color: #00ccff;
+}
+
+.skillName .skillImg img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.skillName .skillImg {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  background-color: #fff;
+}
+
+.skillName p {
+  margin-left: 10px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.skillBar {
+  position: relative;
+}
+
+.skillBar div {
+  height: 10px;
+  margin-left: 20px;
+  border-radius: 10px;
+}
+
+.skillBar .emptyBar {
+  background-color: #ededed;
+
+  z-index: -1;
+  width: 50vw;
+}
+
+.skillBar .fillBar {
+  position: absolute;
+  top: 0;
+  transition: all 0.5s ease-out;
+}
+
+#html .skillBar .fillBar {
+  background-color: #e55126;
+}
+
+#css .skillBar .fillBar {
+  background-color: #0c73b8;
+}
+
+#js .skillBar .fillBar {
+  background-color: #e5a228;
+}
+
+#react .skillBar .fillBar {
+  background-color: #00ccff;
+}
+
+p.percent {
+  margin-left: 10px;
+  font-weight: 200;
 }

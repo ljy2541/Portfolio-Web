@@ -1,4 +1,14 @@
-scrollTo(0, 0);
+// 이벤트 실행 조건 변수
+let eventOn = false;
+let scrollCheck = false;
+let sectionCheck = 0;
+
+const skillPercent = {
+  html: 80,
+  css: 80,
+  js: 60,
+  react: 30,
+};
 
 // 큐브 회전 애니메이션 (gsap 라이브러리)
 let cubeTimeLine = gsap.timeline();
@@ -152,7 +162,7 @@ function cubeDownScrollEvent() {
     })
     .to(".home", {
       opacity: 0,
-      display: "none",
+      visibility: "hidden",
     });
 }
 
@@ -160,8 +170,8 @@ function cubeUpScrollEvent() {
   cubeTimeLine.clear();
   cubeTimeLine
     .to(".home", {
+      visibility: "visible",
       opacity: 1,
-      display: "block",
     })
     .to(".cube", {
       rotationX: 360,
@@ -191,8 +201,78 @@ function cubeUpScrollEvent() {
     });
 }
 
-scrollCheck = 0;
+// 섹션 출력
+const sectionNode = document.getElementsByTagName("section");
 
+function sectionOnEvent(number) {
+  const openTitle = sectionNode[number].querySelector(".open_title");
+  const article = sectionNode[number].querySelector("article");
+  openTitle.setAttribute("class", "open_title on");
+  setTimeout(() => openTitle.setAttribute("class", "open_title"), 2000);
+  setTimeout(() => article.classList.add("on"), 3000);
+
+  if (number === 1) {
+    setTimeout(() => {
+      skillPercentEvent(skillPercent);
+    }, 4000);
+  }
+
+  if (number !== 1) {
+    skillPercentEventInit();
+  }
+}
+
+function sectionOffEvent(number) {
+  const article = sectionNode[number].querySelector("article");
+  article.classList.remove("on");
+  skillPercentEventInit();
+}
+
+// 스킬 퍼센트 카운팅 이벤트
+function skillPercentEvent(percent) {
+  console.log(percent);
+  for (let value in percent) {
+    const skillName = document.getElementById(value);
+    const fillBar = skillName.querySelector(".fillBar");
+    const percentText = skillName.querySelector(".percent");
+    let count = 0;
+    fillBar.style.width = `0%`;
+    let counting = setInterval(() => {
+      if (count == skillPercent[value]) {
+        clearInterval(counting);
+        return false;
+      }
+      count++;
+      fillBar.style.width = `${count}%`;
+      percentText.textContent = `${count}%`;
+    }, 20);
+  }
+}
+
+function skillPercentEventInit() {
+  const fillBar = document.getElementsByClassName("fillBar");
+  const percentText = document.getElementsByClassName("percent");
+
+  for (let i = 0; i < fillBar.length; i++) {
+    fillBar.item(i).style.width = `0%`;
+    console.log(percentText.item(i));
+    percentText.item(i).textContent = `0%`;
+  }
+}
+
+function homeSectionDownEvent() {
+  mainDownScrollEvent();
+  subDownScrollEvent();
+  cubeDownScrollEvent();
+}
+
+function homeSectionUpEvent() {
+  mainUpScrollEvent();
+  subUpScrollEvent();
+  cubeUpScrollEvent();
+}
+
+/* 이벤트 실행 영역 */
 window.addEventListener(
   "wheel",
   function (e) {
@@ -201,18 +281,38 @@ window.addEventListener(
   { passive: false }
 );
 
-console.log(document.querySelector("#mainTag").children);
-
 document.addEventListener("wheel", (e) => {
-  if (e.deltaY > 0 && scrollCheck === 0) {
-    mainDownScrollEvent();
-    subDownScrollEvent();
-    cubeDownScrollEvent();
-    scrollCheck++;
-  } else if (e.deltaY < 0 && scrollCheck === 1) {
-    mainUpScrollEvent();
-    subUpScrollEvent();
-    cubeUpScrollEvent();
-    scrollCheck--;
+  console.log(eventOn);
+  if (eventOn) return;
+
+  if (e.deltaY > 0 && !scrollCheck && sectionCheck === 0) {
+    eventOn = true;
+    homeSectionDownEvent();
+    scrollCheck = true;
+    sectionCheck++;
+    setTimeout(() => sectionOnEvent(sectionCheck), 2000);
+  } else if (e.deltaY < 0 && scrollCheck && sectionCheck === 0) {
+    eventOn = true;
+    homeSectionUpEvent();
+    scrollCheck = false;
+  } else if (e.deltaY > 0 && scrollCheck && sectionCheck >= 1) {
+    if (sectionNode.length - 1 <= sectionCheck) {
+      sectionCheck = sectionNode.length - 1;
+      return;
+    }
+    eventOn = true;
+    sectionOnEvent(sectionCheck);
+    sectionCheck++;
+  } else if (e.deltaY < 0 && scrollCheck && sectionCheck >= 1) {
+    eventOn = true;
+    if (sectionCheck === 1) {
+      homeSectionUpEvent();
+      scrollCheck = false;
+    }
+    sectionOffEvent(sectionCheck);
+    sectionCheck--;
   }
+  console.log(e.deltaY);
+  console.log(sectionCheck);
+  setTimeout(() => (eventOn = false), 5000);
 });
