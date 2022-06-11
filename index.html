@@ -12,6 +12,10 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
+    <link
+  rel="stylesheet"
+  href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+/>
   </head>
   <body>
     <main id="mainTag">
@@ -32,6 +36,73 @@
 
       <section class="introduce">
         <div class="open_title"><h2>저를 소개합니다</h2></div>
+        <article class="profile">
+          <div class="profileArea">
+            <div class="profileImg">
+              <img src="img/profile.png" alt="이제연" />
+            </div>
+            <div class="profileName">
+              심플하고싶은 개발자<br />
+              <span>이제연입니다!</span>
+            </div>
+            <hr class="profileLine" />
+            <div class="profileSubContent">
+              “좋은 소프트웨어의 기능이란 복잡한 것을 간단하게 보이도록 만드는
+              것이다.” - Grady Booch, UML<br /><br />
+              개발자 좋은 웹을 만들기 위해 복잡하지 않고 최대한 심플하게
+              코딩하는 개발자가 되는것이 목표입니다.
+            </div>
+          </div>
+          <div class="profileCotentArea">
+            <div class="profileContent">
+              <h4>WHO?</h4>
+              <div>
+                이제연<br />
+                1994. 08. 23. <br />
+                010.8965.8845 <br />
+                https://github.com/ljy2541 <br />
+                kfuu@naver.com <br />
+              </div>
+            </div>
+            <div class="profileContent">
+              <h4>EDUCATION</h4>
+              <div>
+                2022. 06. 코드잇 React 프론트엔드 개발 (온라인) <br />
+                2021. 04. 자바 & 파이썬 응용SW개발자 양성과정 <br />
+                2017. 09. 스마트기기 UX/UI 디자인(디지털 앱, 웹퍼블리셔)
+                취업과정 <br />
+              </div>
+            </div>
+            <div class="profileContent">
+              <h4>PROJECTS</h4>
+              <div>
+                한내포티 기업 웹사이트 개발 <br />
+                한국공학대학교 홍보용 웹사이트 개발 <br />
+                HINVES 기업 웹사이트 개발 <br />
+                이재명캠프 대선 선거인단 모집용 웹사이트 개발 <br />
+              </div>
+            </div>
+          </div>
+          <div class="profileCotentArea">
+            <div class="profileContent">
+              <h4>AWARD</h4>
+              <div>
+                2021.04. 자바 & 파이썬 응용SW개발자 양성과정 학업성취 최우수상
+              </div>
+            </div>
+            <div class="profileContent">
+              <h4>CERTIFICATE</h4>
+              <div>2021. 01. 네트워크관리사 2급</div>
+            </div>
+            <div class="profileContent">
+              
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+      <section class="skillSection">
+        <div class="open_title"><h2>제가 보유한 스킬입니다</h2></div>
         <article class="skill">
           <h3>보유스킬</h3>
           <div id="skillBox">
@@ -90,8 +161,36 @@
           </div>
         </article>
       </section>
+      <section class="portfoiloSection">
+        <div class="open_title"><h2>저의 포트폴리오 입니다</h2></div>
+        <article class="Portfoilo">
+          <h3>포트폴리오</h3>
+          <div class="silde">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <a href="http://hannae.co.kr" target="_blank" ><div class="pfImg"><img src="img/p1.png" alt="한내포티"></div></a>
+              </div>
+              <div class="swiper-slide">
+                <a href="http://www.tukorea.ac.kr/event2022/index.html" target="_blank"><div class="pfImg"><img src="img/p2.png" alt="한국공학대학교"></div></a>
+              </div>
+              <div class="swiper-slide">
+                <a href="http://hinves.co.kr" target="_blank"><div class="pfImg"><img src="img/p3.png" alt="HINVES"></div></a>
+              </div>
+              <div class="swiper-slide">
+                <a href="https://ljy2541.github.io/MBTI_Test" target="_blank"><div class="pfImg"><img src="img/p4.png" alt="이재명캠프"></div></a>
+              </div>
+              <div class="swiper-slide">
+                <a href="https://ljy2541.github.io/movie_app" target="_blank"><div class="pfImg"><img src="img/p5.png" alt="리액트무비앱"></div></a>
+              </div>
+              
+            </div>
+          </div>
+        </article>
+      </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="index.js"></script>
+    <script type="module" src="silde.js"></script>
   </body>
 </html>

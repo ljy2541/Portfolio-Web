@@ -204,28 +204,33 @@ function cubeUpScrollEvent() {
 // 섹션 출력
 const sectionNode = document.getElementsByTagName("section");
 
-function sectionOnEvent(number) {
-  const openTitle = sectionNode[number].querySelector(".open_title");
-  const article = sectionNode[number].querySelector("article");
+function sectionOnEvent(sectionCheckNum) {
+  console.log(`${sectionCheckNum}이 들어왔습니다`);
+  let openTitle = sectionNode
+    .item(sectionCheckNum)
+    .querySelector(".open_title");
+  let article = sectionNode.item(sectionCheckNum).querySelector("article");
+  sectionNode.item(sectionCheckNum).classList.add("on");
   openTitle.setAttribute("class", "open_title on");
   setTimeout(() => openTitle.setAttribute("class", "open_title"), 2000);
   setTimeout(() => article.classList.add("on"), 3000);
 
-  if (number === 1) {
+  if (sectionCheckNum === 2) {
     setTimeout(() => {
       skillPercentEvent(skillPercent);
     }, 4000);
   }
 
-  if (number !== 1) {
+  if (sectionCheckNum !== 2) {
     skillPercentEventInit();
   }
 }
 
-function sectionOffEvent(number) {
-  const article = sectionNode[number].querySelector("article");
+function sectionOffEvent(sectionCheckNum) {
+  const article = sectionNode.item(sectionCheckNum).querySelector("article");
   article.classList.remove("on");
   skillPercentEventInit();
+  sectionNode.item(sectionCheckNum).classList.remove("on");
 }
 
 // 스킬 퍼센트 카운팅 이벤트
@@ -255,7 +260,6 @@ function skillPercentEventInit() {
 
   for (let i = 0; i < fillBar.length; i++) {
     fillBar.item(i).style.width = `0%`;
-    console.log(percentText.item(i));
     percentText.item(i).textContent = `0%`;
   }
 }
@@ -300,19 +304,29 @@ document.addEventListener("wheel", (e) => {
       sectionCheck = sectionNode.length - 1;
       return;
     }
+
     eventOn = true;
-    sectionOnEvent(sectionCheck);
     sectionCheck++;
+    sectionOnEvent(sectionCheck);
+
+    if (sectionCheck >= 2) {
+      sectionOffEvent(sectionCheck - 1);
+    }
   } else if (e.deltaY < 0 && scrollCheck && sectionCheck >= 1) {
     eventOn = true;
     if (sectionCheck === 1) {
       homeSectionUpEvent();
       scrollCheck = false;
+      sectionOffEvent(sectionCheck);
+      sectionCheck--;
+      setTimeout(() => (eventOn = false), 3000);
+      return;
     }
     sectionOffEvent(sectionCheck);
     sectionCheck--;
+    sectionOnEvent(sectionCheck);
   }
   console.log(e.deltaY);
   console.log(sectionCheck);
-  setTimeout(() => (eventOn = false), 5000);
+  setTimeout(() => (eventOn = false), 3000);
 });

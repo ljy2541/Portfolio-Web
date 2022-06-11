@@ -20,7 +20,14 @@ p {
   font-weight: 300;
 }
 
-/* 폰트 */
+/* 폰트 End */
+
+main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 
 .move {
   display: flex;
@@ -120,10 +127,17 @@ p {
 }
 
 section:not(.home) {
-  display: flex;
+  visibility: hidden;
   align-items: center;
   justify-content: center;
+  width: 90vw;
   height: 100vh;
+  position: absolute;
+  padding: 0 5vw;
+}
+
+section.on {
+  visibility: visible;
 }
 
 .open_title {
@@ -135,17 +149,18 @@ section:not(.home) {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: -1;
 }
 
 .open_title {
-  width: 100vw;
+  width: 90vw;
   height: 100vh;
 }
 
 .open_title.on {
   opacity: 1;
   transform: translateY(0);
+  z-index: 100;
 }
 
 article {
@@ -163,11 +178,11 @@ article h3 {
   border-bottom: 2px solid #000;
 }
 
-article.skill {
+section > article {
   opacity: 0;
   transition: all 0.5s ease-out;
 }
-article.skill.on {
+section > article.on {
   opacity: 1;
 }
 
@@ -265,4 +280,87 @@ article.skill.on {
 p.percent {
   margin-left: 10px;
   font-weight: 200;
+}
+
+article.profile {
+  display: flex;
+  flex-direction: row;
+}
+
+.profile > div {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileImg {
+  width: 200px;
+  height: 200px;
+  border-radius: 1000px;
+  overflow: hidden;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+}
+
+.profileImg img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
+
+.profileLine {
+  width: 15px;
+  height: 2px;
+  background-color: #000;
+  margin: 10px 0;
+}
+
+.profileName {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-top: 20px;
+}
+
+.profileName span {
+  font-weight: 700;
+}
+
+.profileSubContent {
+  width: 200px;
+  text-align: justify;
+  font-weight: 300;
+}
+
+.profile div.profileCotentArea {
+  align-items: flex-start;
+}
+
+.profileContent {
+  height: 200px;
+  margin-bottom: 50px;
+}
+
+.profileCotentArea .profileContent:last-child {
+  margin: 0;
+}
+
+.profileContent > div {
+  margin-top: 20px;
+  font-weight: 300;
+}
+
+.pfImg img {
+  width: 800px;
+}
+
+.silde {
+  width: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
